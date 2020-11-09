@@ -1,0 +1,52 @@
+apiVersion: cluster.x-k8s.io/v1alpha3
+kind: Machine
+metadata:
+  labels:
+    set: master
+  name: master-1
+spec:
+  clusterName: example
+  bootstrap: {}
+  infrastructureRef:
+    apiVersion: cluster.weave.works/v1alpha3
+    kind: ExistingInfraMachine
+    name: master-1
+---
+apiVersion: cluster.weave.works/v1alpha3
+kind: ExistingInfraMachine
+metadata:
+  name: master-1
+spec:
+  private:
+    address: 0.0.0.0
+    port: 2222
+  public:
+    address: 192.168.1.2
+    port: 22
+---
+apiVersion: cluster.x-k8s.io/v1alpha3
+kind: Machine
+metadata:
+  labels:
+    set: master
+  name: master-2
+spec:
+  clusterName: example
+  bootstrap: {}
+  infrastructureRef:
+    apiVersion: cluster.weave.works/v1alpha3
+    kind: ExistingInfraMachine
+    name: master-2
+---
+apiVersion: cluster.weave.works/v1alpha3
+kind: ExistingInfraMachine
+metadata:
+  name: master-2
+spec:
+  private:
+    address: 0.0.0.0
+    port: 2222
+  public:
+    address: 192.168.1.3
+    port: 22
+    
